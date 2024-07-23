@@ -6,5 +6,5 @@ from datetime import datetime
 class Item:
     title: str
     dt: datetime
-    # link:
-    # description:
+    link: str
+    description: str
