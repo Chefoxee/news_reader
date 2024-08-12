@@ -19,7 +19,7 @@ class RssFeed(Feed):
 
     def get_updates(self) -> list[Item]:
         content = self.get_feed_content()
-        root = ET.fromstring(content) 
+        root = ET.fromstring(content)
         channel = root.find("channel")
         nodes = channel.findall("item")
 
@@ -41,33 +41,5 @@ class RssFeed(Feed):
 
         return updates
 
-
     def get_feed_content(self) -> str:
         return requests.get(self.feed_url).text
-
-if __name__ == '__main__':
-
-
-    feeds = [
-        RssFeed(
-            'https://habr.com/ru/rss/hubs/sql/articles/?fl=ru&limit=100',
-            last_read_dt=datetime(1901, 1, 1, 0, 0, 0)
-        ),
-        RssFeed(
-            'https://habr.com/ru/rss/hubs/python/articles/?fl=ru&limit=100',
-            last_read_dt=datetime(1901, 1, 1, 0, 0, 0)
-        ),
-
-    ]
-
-    all_updates = []
-
-    for feed in feeds:
-        updates = feed.get_updates()
-        all_updates.extend(updates)
-
-    all_updates.sort(key= lambda item: item.dt)#изучить
-    from pprint import pprint
-    pprint(all_updates)
-
-
