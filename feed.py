@@ -19,7 +19,7 @@ class RssFeed(Feed):
 
     def get_updates(self) -> list[Item]:
         content = self.get_feed_content()
-        root = ET.fromstring(content) #
+        root = ET.fromstring(content) 
         channel = root.find("channel")
         nodes = channel.findall("item")
 
